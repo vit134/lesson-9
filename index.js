@@ -1,28 +1,26 @@
 import streets from './streets';
 
 const input = document.querySelector('.input');
-const suggestResult = document.querySelector('.search');
+const suggestResult = document.querySelector('.suggest');
 
 
-function suggest() {
-	const value = this.value.toLowerCase();
-	let result = [];
-	let resCount = 0;
+function inputHandler() {
+	setTimeout(() => {
+		const value = this.value.toLowerCase();
+		let result = [];
 
-	if (value !== '') {
-		for (let adress of streets) {
-			if (resCount < 10) {
+		if (value !== '') {
+			for (let adress of streets) {
+
+				if (result.length > 10) break;
 				if (adress.toLowerCase().indexOf(value) !== -1) {
-					result.push(`<div class="search__item">${resCount + 1}. <b>${adress}</b></div>`);
-					resCount++;
+					result.push(`<div class="suggest__item"><b>${adress}</b></div>`);
 				}
-			} else {
-				break;
 			}
 		}
-	}
-	
-	suggestResult.innerHTML = result.join('');
+
+		suggestResult.innerHTML = result.join('');
+	}, 500);
 }
 
-input.addEventListener('keyup', suggest);
+input.addEventListener('keyup', inputHandler);

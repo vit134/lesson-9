@@ -1,9 +1,10 @@
 {
-  "name": "lesson-7",
+  "name": "lesson-9",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "serve",
     "build": "webpack --mode development --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
