@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import streetsMoscow from './moscow-streets';
-import streetsNY from './ny-streets';
+import streetsMoscow from '../utils/moscow-streets';
+import streetsNY from '../utils/ny-streets';
 
 const streets = [...streetsMoscow, ...streetsNY];
 
