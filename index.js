@@ -4,6 +4,8 @@ import streetsNY from './ny-streets';
 
 const streets = [...streetsMoscow, ...streetsNY];
 
+let process = false;
+
 class Suggest {
 	constructor(parent, handler) {
 		this.parent = parent;
@@ -22,20 +24,27 @@ const main1 = new Suggest(document.querySelector('.main_1'), suggest_1);
 main1.subscribe();
 
 function suggest_1(input, suggestResult) {
-	const value = input.value;
-	const reg = new RegExp(value,'i') ;
-	let result = [];
-	
-	console.time('time of first version');
-	if (value !== '') {
-		for (let adress of streets) {
-			if (result.length > 10) break;
-			if (reg.test(adress) ) {
-				result.push(`<div class="suggest__item"><b>${adress}</b></div>`);
-			}
-		}		
-	}
+	if (!process) {
+		process = setTimeout(() => {
 
-	suggestResult.innerHTML = result.join('');
-	console.timeEnd('time of first version');
+			const value = input.value;
+			console.log(value);
+			const reg = new RegExp(value, 'i');
+			let result = [];
+
+			console.time('time');
+			if (value !== '') {
+				for (let adress of streets) {
+					if (result.length > 10) break;
+					if (reg.test(adress)) {
+						result.push(`<div class="suggest__item"><b>${adress}</b></div>`);
+					}
+				}
+			}
+
+			suggestResult.innerHTML = result.join('');
+			console.timeEnd('time');
+			process = false;
+		}, 200);
+	}
 };
