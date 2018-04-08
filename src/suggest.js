@@ -4,26 +4,12 @@ import streetsNY from '../utils/ny-streets';
 
 const streets = [...streetsMoscow, ...streetsNY];
 
+const input = document.querySelector('.input');
+const suggestResult = document.querySelector('.suggest');
+
 let process = false;
 
-class Suggest {
-	constructor(parent, handler) {
-		this.parent = parent;
-		this.input = this.parent.querySelector('.input');
-		this.suggestResult = this.parent.querySelector('.suggest');
-		this.handler = handler;
-	}
-
-	subscribe() {
-		this.input.addEventListener('keyup', this.handler.bind(null, this.input, this.suggestResult));
-	}
-}
-
-const main1 = new Suggest(document.querySelector('.main_1'), suggest_1);
-
-main1.subscribe();
-
-function suggest_1(input, suggestResult) {
+function suggest() {
 	if (!process) {
 		process = setTimeout(() => {
 
@@ -47,4 +33,6 @@ function suggest_1(input, suggestResult) {
 			process = false;
 		}, 200);
 	}
-};
+}
+
+input.addEventListener('keyup', suggest);
